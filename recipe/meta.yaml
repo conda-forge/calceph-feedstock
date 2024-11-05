@@ -1,4 +1,4 @@
-{% set version = "3.5.5" %}
+{% set version = "4.0.1" %}
 
 package:
   name: calceph
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://www.imcce.fr/content/medias/recherche/equipes/asd/calceph/calceph-{{ version }}.tar.gz
-  sha256: 34b7a4fbcbfff3bd54de8f4636fdbb8a8345c7432fbbe3a61a4f5d90b76bb962
+  sha256: af120397ab185fc77a60e1656a433a12b7fc17d501961463079980c837f9e73e
   patches:
     - win_build_fix.diff
 
@@ -20,6 +20,7 @@ requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - make                # [unix]
 
 test:
