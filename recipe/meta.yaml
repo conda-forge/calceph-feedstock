@@ -1,4 +1,4 @@
-{% set version = "3.5.5" %}
+{% set version = "5.0.0" %}
 
 package:
   name: calceph
@@ -6,9 +6,8 @@ package:
 
 source:
   url: https://www.imcce.fr/content/medias/recherche/equipes/asd/calceph/calceph-{{ version }}.tar.gz
-  sha256: 34b7a4fbcbfff3bd54de8f4636fdbb8a8345c7432fbbe3a61a4f5d90b76bb962
-  patches:
-    - win_build_fix.diff
+  sha256: aea5120af73f0a492cea2fdc9c63078ee5b625a181cc4f0622ffa68160a2d20b
+
 
 build:
   number: 0
@@ -18,8 +17,9 @@ build:
 
 requirements:
   build:
-    - gnuconfig  # [unix]
-    - {{ compiler('c') }}
+    - cmake
+    - {{ compiler("c") }}
+    - {{ stdlib("c") }}
     - make                # [unix]
 
 test:
@@ -27,13 +27,14 @@ test:
     - test -f $PREFIX/include/calceph.h                           # [unix]
     - test -f $PREFIX/lib/libcalceph${SHLIB_EXT}                  # [unix]
     - if not exist %PREFIX%\\Library\\include\\calceph.h exit 1   # [win]
-    - if not exist %PREFIX%\\Library\\lib\\libcalceph.lib exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\calceph.lib exit 1     # [win]
 
 about:
-  home: https://www.imcce.fr/inpop/calceph/
+  home: https://calceph.imcce.fr/
   license: CECILL-C OR CECILL-B OR CECILL-2.1
   license_file: COPYING_CECILL_C.LIB
-  summary: A library to access the binary planetary ephemeris files, such INPOPxx, JPL DExxx and SPICE ephemeris files.
+  summary: A library to access the binary ephemeris files of solar system bodies
+  dev_url: https://gitlab.obspm.fr/imcce_calceph/calceph
 
 extra:
   recipe-maintainers:
